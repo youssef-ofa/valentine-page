@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just For You ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:linear-gradient(-45deg,#ff4e50,#fc913a,#f9d423,#ff4e50);
+  background-size:400% 400%;
+  animation:gradientMove 10s ease infinite;
+  color:white;
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.container{
+  text-align:center;
+  z-index:2;
+  position:relative;
+}
+
+h1{
+  font-size:3rem;
+  margin-top:20px;
+  text-shadow:0 0 20px rgba(255,255,255,0.7);
+  position:relative;
+  z-index:2;
+}
+
+.message{
+  font-size:1.5rem;
+  margin-bottom:30px;
+  opacity:0;
+  animation:fadeIn 3s forwards 1.5s;
+}
+
+button{
+  padding:15px 35px;
+  font-size:18px;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s;
+}
+
+#yes{
+  background:white;
+  color:#ff4e50;
+  box-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
+#yes:hover{
+  transform:scale(1.1);
+}
+
+#no{
+  background:#ff4e50;
+  color:white;
+  position:absolute;
+}
+
+.final-message {
+  font-size:1.5rem;
+  position:absolute;
+  top:-30px; 
+  left:50%;
+  transform:translateX(-50%);
+  opacity:0.3; 
+  transition:1s;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+.final-message.active{
+  opacity:1;
+}
+
+.hearts{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  overflow:hidden;
+  z-index:1;
+}
+
+.heart{
+  position:absolute;
+  color:white;
+  font-size:20px;
+  animation:float 10s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0.5);}
+  100%{transform:translateY(-10vh) scale(1.2);}
+}
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="container">
+  <div class="final-message" id="finalText">You are my life ❤️</div>
+
+  <h1>For You Mama ❤️</h1>
+  
+  <div class="message">
+    From the moment I met you Bosbosty … something changed ✨❤️
+  </div>
+
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 😅</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseover",()=>{
+  noBtn.style.top=Math.random()*window.innerHeight+"px";
+  noBtn.style.left=Math.random()*window.innerWidth+"px";
+});
+
+document.getElementById("yes").addEventListener("click",()=>{
+  document.getElementById("finalText").classList.add("active");
+});
+
+// Floating Hearts
+function createHearts(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*5+5)+"s";
+  document.querySelector(".hearts").appendChild(heart);
+
+  setTimeout(()=>{heart.remove();},10000);
+}
+
+setInterval(createHearts,300);
+</script>
+
+</body>
+</html>
